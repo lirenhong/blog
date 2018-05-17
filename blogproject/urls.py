@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'', include('blog_lrh.urls')),
     url(r'', include('comments.urls')),
     url(r'^all/rss/$', AllPostsRssFeed(), name='rss'),
+    url(r'^search/', include('haystack.urls')),
 ]

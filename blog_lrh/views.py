@@ -2,17 +2,20 @@
 from __future__ import unicode_literals
 
 import markdown
+from markdown.extensions.toc import TocExtension
+from django.utils.text import slugify
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Category, Tag
 from comments.forms import CommentForm
 from django.views.generic import ListView, DetailView
+from django.db.models import Q
 # Create your views here.
 
 class IndexView(ListView):
     model = Post
     template_name = 'blog_lrh/index.html'
     context_object_name = 'post_list'
-    paginate_by = 1
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -106,12 +109,14 @@ class PostDetailView(DetailView):
 
     def get_object(self, queryset=None):
         post = super(PostDetailView, self).get_object(queryset=None)
-        post.body = markdown.markdown(post.body,
-                                      extensions=[
+        md = markdown.markdown(extensions=[
                                           'markdown.extensions.extra',
                                           'markdown.extensions.codehilite',
-                                          'markdown.extensions.toc',
+                                          #'markdown.extensions.toc',
+                                          TocExtension(slugify=slugify),
                                       ])
+        post.body = md.convert(post.body)
+        post.toc = md.toc
         return post
 
     def get_context_data(self, **kwargs):
@@ -143,3 +148,16 @@ class TagView(ListView):
     def get_queryset(self):
         tag = get_object_or_404(Tag,  pk=self.kwargs.get('pk'))
         return super(TagView, self).get_queryset().filter(tags=tag)
+
+
+# def search(request):
+#     print "1"
+#     q = request.get("q")
+#     error_msg = ""
+#     if not q:
+#         error_msg = u"请输入关键词"
+#         return render(request, 'blog_lrh:index.html', {"error_msg": error_msg})
+#     post_list = Post.object.filter(Q(title__icontains=q) | Q(body__icontains=q))
+#     return render(request, "blog_lrh/index", {"error_msg": error_msg,
+#                                               "post_list": post_list})
+
