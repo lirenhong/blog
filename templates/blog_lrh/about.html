@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+    <title>LRH &amp; Blog</title>
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #context{ color: red;
+        font-family: Georgia;
+        font-size: 100px;
+        margin:300px auto;
+        left: 30px;
+        }
+    </style>
+</head>
+<body style="background-image: url({% static 'blog_lrh/images/test.jpg' %})">
+    <p><a href="{% url 'blog_lrh:index' %}">首页</a></p>
+    <marquee id="context">火箭总冠军!!!</marquee>
+</body>
+</html>

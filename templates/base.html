@@ -49,8 +49,8 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="cl-effect-11"><a href="{% url 'blog_lrh:index' %}" data-hover="首页">首页</a></li>
                             <li class="cl-effect-11"><a href="full-width.html" data-hover="博客">博客</a></li>
-                            <li class="cl-effect-11"><a href="about.html" data-hover="关于">关于</a></li>
-                            <li class="cl-effect-11"><a href="contact.html" data-hover="联系">联系</a></li>
+                            <li class="cl-effect-11"><a href="{% url 'blog_lrh:about' %}" data-hover="关于">关于</a></li>
+                            <!-- <li class="cl-effect-11"><a href="contact.html" data-hover="联系">联系</a></li> -->
                         </ul>
                     </div><!-- /.navbar-collapse -->
                 </nav>
@@ -143,10 +143,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p class="copyright">&copy 2017 - 采集自<a href="http://www.cssmoban.com/"
-                                                        target="_blank" title="模板之家">模板之家</a>
-                    - 由<a href="http://zmrenwu.com/" title="网页模板" target="_blank">追梦人物的博客</a>修改
-                </p>
+                <p class="copyright">&copy 2017 李仁洪的博客</p>
             </div>
         </div>
     </div>

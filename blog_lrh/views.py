@@ -150,14 +150,6 @@ class TagView(ListView):
         return super(TagView, self).get_queryset().filter(tags=tag)
 
 
-# def search(request):
-#     print "1"
-#     q = request.get("q")
-#     error_msg = ""
-#     if not q:
-#         error_msg = u"请输入关键词"
-#         return render(request, 'blog_lrh:index.html', {"error_msg": error_msg})
-#     post_list = Post.object.filter(Q(title__icontains=q) | Q(body__icontains=q))
-#     return render(request, "blog_lrh/index", {"error_msg": error_msg,
-#                                               "post_list": post_list})
+def about(request):
+    return render(request, "blog_lrh/about.html")
 
